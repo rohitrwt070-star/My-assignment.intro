@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Srishty ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+
+background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
+background-size:400% 400%;
+animation:bgMove 12s infinite alternate;
+}
+
+@keyframes bgMove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
+
+/* FLOATING ELEMENTS */
+
+#floating{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+z-index:9999;
+}
+
+.float{
+position:absolute;
+bottom:-50px;
+animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-120vh);opacity:0;}
+}
+
+/* PAGE */
+
+.page{
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+padding:25px;
+z-index:1;
+}
+
+.active{
+display:flex;
+}
+
+h1{
+font-size:28px;
+margin-bottom:40px;
+}
+
+h2{
+font-size:22px;
+line-height:1.5;
+margin-bottom:40px;
+}
+
+/* BUTTONS */
+
+button{
+padding:14px 30px;
+margin:20px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.6);
+background:rgba(255,255,255,0.2);
+color:white;
+font-size:16px;
+cursor:pointer;
+backdrop-filter:blur(10px);
+transition:0.3s;
+width:220px;
+max-width:85%;
+}
+
+button:hover{
+transform:scale(1.05);
+background:rgba(255,255,255,0.4);
+}
+
+/* TEXT AREA */
+
+textarea{
+width:90%;
+max-width:400px;
+height:130px;
+border-radius:10px;
+border:none;
+padding:12px;
+font-size:15px;
+outline:none;
+}
+
+/* BACKGROUND IMAGES */
+
+#page4{
+background:url("boy-flower.jpg") no-repeat center center;
+background-size:cover;
+}
+
+#page5{
+background:url("boy-pencil.jpg") no-repeat center center;
+background-size:cover;
+}
+
+#page6{
+background:url("shy-girl.jpg") no-repeat center center;
+background-size:cover;
+}
+
+/* DARK OVERLAY */
+
+#page4::before,
+#page5::before,
+#page6::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+z-index:1;
+}
+
+#page4 *,
+#page5 *,
+#page6 *{
+position:relative;
+z-index:2;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="floating"></div>
+
+<audio id="music" src="https://cdn.pixabay.com/audio/2022/03/15/audio_3b0b3c2a1b.mp3"></audio>
+
+<!-- START PAGE -->
+
+<div id="startScreen" class="page active">
+
+<h1>Srishty ❤️ this little surprise is just for you</h1>
+
+<button onclick="startQuiz()">Start</button>
+
+</div>
+
+<!-- PAGE 1 -->
+
+<div id="page1" class="page">
+
+<h2>Is srishty enjoying this quiz 🕺🕺</h2>
+
+<button onclick="runAway(this)">No</button>
+
+<button onclick="nextPage()">Yes</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div id="page2" class="page">
+
+<h2>Does srishty like taking to rohit? 😋</h2>
+
+<button onclick="runAway(this)">No</button>
+
+<button onclick="nextPage()">Yes</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div id="page3" class="page">
+
+<h2>What does shrishti this rohit is which flag? 🏳️</h2>
+
+<button onclick="runAway(this)">Red Flag</button>
+
+<button onclick="runAway(this)">Green Flag</button>
+
+<button onclick="nextPage()">My Flag</button>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div id="page4" class="page">
+
+<h2>Srishty........ Will you be Rohit's girlfriend ? ❤️❤️</h2>
+
+<button onclick="loveExplosion()">Yes</button>
+
+<button onclick="loveExplosion()">Of course</button>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div id="page5" class="page">
+
+<h2>You made Rohit the happiest person on earth 😭🤍</h2>
+
+<button onclick="nextPage()">Continue</button>
+
+</div>
+
+<!-- PAGE 6 -->
+
+<div id="page6" class="page">
+
+<h2>
+Write anything about Rohit that you want to tell him but are too shy to say 🤭🤭  
+Don’t worry, even Rohit can’t read it 🤫
+</h2>
+
+<form id="secretForm">
+
+<textarea name="message" placeholder="Write here..." required></textarea>
+
+<br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+<!-- PAGE 7 -->
+
+<div id="page7" class="page">
+
+<h2>
+Just kidding, of course I want to see it… and I can see it 🤣🤣😋
+</h2>
+
+<button onclick="finish()">Finish</button>
+
+</div>
+
+<script>
+
+/* START QUIZ */
+
+function startQuiz(){
+document.getElementById("startScreen").classList.remove("active");
+document.getElementById("page1").classList.add("active");
+}
+
+/* PAGE NAVIGATION */
+
+let currentPage=1;
+
+function nextPage(){
+
+document.getElementById("page"+currentPage).classList.remove("active");
+
+currentPage++;
+
+let next=document.getElementById("page"+currentPage);
+
+if(next){
+next.classList.add("active");
+}
+
+}
+
+/* RUNNING BUTTON */
+
+function runAway(btn){
+
+let maxX=window.innerWidth-btn.offsetWidth;
+
+let maxY=window.innerHeight-btn.offsetHeight;
+
+let x=Math.random()*maxX;
+
+let y=Math.random()*maxY;
+
+btn.style.position="absolute";
+
+btn.style.left=x+"px";
+
+btn.style.top=y+"px";
+
+}
+
+/* LOVE EXPLOSION */
+
+function loveExplosion(){
+
+document.getElementById("music").play();
+
+for(let i=0;i<120;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="❤️";
+
+heart.style.position="fixed";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.top=Math.random()*100+"vh";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove();},2000);
+
+}
+
+setTimeout(()=>{nextPage();},1500);
+
+}
+
+/* FLOATING HEARTS */
+
+const floating=document.getElementById("floating");
+
+const icons=["❤️","🌸","💮","💖"];
+
+function createFloat(){
+
+let el=document.createElement("div");
+
+el.className="float";
+
+el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+el.style.left=Math.random()*100+"vw";
+
+el.style.fontSize=(18+Math.random()*20)+"px";
+
+el.style.animationDuration=(6+Math.random()*4)+"s";
+
+floating.appendChild(el);
+
+setTimeout(()=>{el.remove();},10000);
+
+}
+
+setInterval(createFloat,500);
+
+/* FORMSPREE SUBMIT + NEXT PAGE */
+
+document.getElementById("secretForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+fetch("https://formspree.io/f/mkoqrogz",{
+
+method:"POST",
+
+body:new FormData(this),
+
+headers:{'Accept':'application/json'}
+
+}).then(()=>{
+
+nextPage();
+
+});
+
+});
+
+/* FINAL MESSAGE */
+
+function finish(){
+
+alert("Rohit ❤️ Srishty");
+
+}
+
+</script>
+
+</body>
+</html>
